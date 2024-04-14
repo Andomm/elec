@@ -31,7 +31,10 @@ var getPricesCmd = &cobra.Command{
 	Short: "Get prices for electricity",
 	Long:  `Get prices for electricity for a given date`,
 	Run: func(cmd *cobra.Command, args []string) {
-		getPrices(Date, Hours, Expensive)
+		err := getPrices(Date, Hours, Expensive)
+		if err != nil {
+			fmt.Println("Error:", err)
+		}
 	},
 }
 
@@ -72,7 +75,6 @@ func getPrices(date string, hours int, expensive bool) error {
 	params.Add("tulos", "haja")
 	base.RawQuery = params.Encode()
 
-	fmt.Println("URL:", base.String())
 	resp, err := http.Get(base.String())
 	if err != nil {
 		fmt.Println("Error:", err)
