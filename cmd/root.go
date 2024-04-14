@@ -13,8 +13,8 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "elec",
-	Short: "Get prices for electricity",
-	Long:  "Get prices for electricity for a given date and time",
+	Short: "Get cheapest prices for electricity",
+	Long:  "Get cheapest prices for electricity for a given date and time",
 	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
@@ -27,11 +27,10 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	rootCmd.PersistentFlags().StringVarP(&Date, "date", "d", "", "Define the date to get prices for")
+	rootCmd.PersistentFlags().StringVarP(&Date, "date", "d", "", "Define the date to get prices for (defaults to today)")
 	viper.BindPFlag("date", rootCmd.PersistentFlags().Lookup("date"))
-	// rootCmd.PersistentFlags().StringVarP(&Time, "time", "t", time.Now().Format("15:04"), "Define the time to get prices for")
-	// viper.BindPFlag("time", rootCmd.PersistentFlags().Lookup("time"))
 	rootCmd.PersistentFlags().IntVar(&Hours, "hours", 24, "Define the number of hours to get prices for")
 	rootCmd.MarkFlagRequired("hours")
+	rootCmd.PersistentFlags().BoolVarP(&Expensive, "expensive", "e", false, "Boolean flag to get the most expensive prices")
 	viper.BindPFlag("hours", rootCmd.PersistentFlags().Lookup("hours"))
 }
