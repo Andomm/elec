@@ -1,4 +1,4 @@
-module gihub.com/andomm/elec
+module github.com/Andomm/elec
 
 go 1.22.1
 
