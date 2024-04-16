@@ -26,7 +26,6 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.PersistentFlags().StringVarP(&Date, "date", "d", "", "Define the date to get prices for (defaults to today)")
 	viper.BindPFlag("date", rootCmd.PersistentFlags().Lookup("date"))
 	rootCmd.PersistentFlags().IntVar(&Hours, "hours", 24, "Define the number of hours to get prices for")
